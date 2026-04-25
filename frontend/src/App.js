@@ -5,8 +5,8 @@ import AdminLogin from "./components/AdminLogin";
 import { io } from "socket.io-client";
 import axios from "axios";
 import "./App.css";
-
-const socket = io("http://localhost:5000");
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+const socket = io(API_URL);
 
 function App() {
     const [queue, setQueue] = useState([]);
@@ -16,7 +16,7 @@ function App() {
 
     useEffect(() => {
         const fetchQueue = async () => {
-            const res = await axios.get("http://localhost:5000/api/queue");
+            const res = await axios.get(`${API_URL}/api/queue`);
             setQueue(res.data);
         };
         fetchQueue();
@@ -27,7 +27,7 @@ function App() {
 
     const removeNextVehicle = async () => {
         if (window.confirm("Mark next vehicle as served?")) {
-            await axios.delete("http://localhost:5000/api/queue/next");
+            await axios.delete(`${API_URL}/api/queue/next`);
         }
     };
 

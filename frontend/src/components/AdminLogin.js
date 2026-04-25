@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 const AdminLogin = ({ setIsAdmin }) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -10,7 +10,7 @@ const AdminLogin = ({ setIsAdmin }) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const res = await axios.post("http://localhost:5000/api/admin/login", { username, password });
+            const res = await axios.post(`${API_URL}/api/admin/login`, { username, password });
             if (res.data.success) {
                 setIsAdmin(true);
                 alert("Welcome back, Admin!");

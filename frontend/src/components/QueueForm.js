@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
 const QueueForm = ({ setQueue, setToken }) => {
     const [name, setName] = useState("");
     const [vehicleNumber, setVehicleNumber] = useState("");
@@ -12,7 +12,7 @@ const QueueForm = ({ setQueue, setToken }) => {
 
         setLoading(true);
         try {
-            const res = await axios.post("http://localhost:5000/api/queue/join", { name, vehicleNumber });
+            const res = await axios.post(`${API_URL}/api/queue/join`, { name, vehicleNumber });
             setToken(res.data);
             // setQueue(prev => [...prev, res.data]); // Removed to prevent double updates
             setName(""); setVehicleNumber("");
