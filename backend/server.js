@@ -22,6 +22,10 @@ app.use((req, res, next) => {
     next();
 });
 
+app.get("/", (req, res) => {
+    res.send("eFuell Backend is running successfully!");
+});
+
 // Routes
 app.use("/api/queue", queueRoutes);
 app.use("/api/admin", adminRoutes);
